@@ -17,7 +17,7 @@ describe('DefaultTreeviewI18n', () => {
   describe('getText', () => {
     it('should return "All" if having no unchecked items', () => {
       const selection: TreeviewSelection = {
-        checkedItems: undefined,
+        checkedItems: [],
         uncheckedItems: []
       };
       expect(treeviewI18n.getText(selection)).toBe('All');

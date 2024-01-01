@@ -8,9 +8,9 @@
  */
 
 
-import { ɵglobal as global } from '@angular/core';
-import { ɵgetDOM as getDOM } from '@angular/platform-browser';
-
+import {ɵglobal as global} from '@angular/core';
+import {ɵgetDOM as getDOM} from '@angular/platform-browser';
+import {childNodesAsList, hasClass, hasStyle, isCommentNode} from './browser_utils';
 
 
 /**
@@ -90,7 +90,7 @@ export interface NgMatchers extends jasmine.Matchers<any> {
     toHaveMap(expected: { [k: string]: any }): boolean;
 }
 
-const _global = <any>(typeof window === 'undefined' ? global : window);
+const _global = <any> (typeof window === 'undefined' ? global : window);
 
 /**
  * Jasmine matching function with Angular matchers mixed in.
@@ -99,60 +99,44 @@ const _global = <any>(typeof window === 'undefined' ? global : window);
  *
  * {@example testing/ts/matchers.ts region='toHaveText'}
  */
-export const expect: (actual: any) => NgMatchers = <any>_global.expect;
+export const expect: (actual: any) => NgMatchers = <any> _global.expect;
 
 
 // Some Map polyfills don't polyfill Map.toString correctly, which
 // gives us bad error messages in tests.
 // The only way to do this in Jasmine is to monkey patch a method
 // to the object :-(
-(Map as any).prototype['jasmineToString'] = function () {
+(Map as any).prototype['jasmineToString'] = function() {
     const m = this;
     if (!m) {
         return '' + m;
     }
     const res: any[] = [];
-    m.forEach((v: any, k: any) => { res.push(`${k}:${v}`); });
+    m.forEach((v: any, k: any) => {
+        res.push(`${k}:${v}`);
+    });
     return `{ ${res.join(',')} }`;
 };
 
-_global.beforeEach(function () {
+_global.beforeEach(function() {
     jasmine.addMatchers({
-        // Custom handler for Map as Jasmine does not support it yet
-        toEqual: function (util) {
-            return {
-                compare: function (actual: any, expected: any) {
-                    return { pass: util.equals(actual, expected, [compareMap]) };
-                }
-            };
 
-            function compareMap(actual: any, expected: any): boolean {
-                if (actual instanceof Map) {
-                    let pass = actual.size === expected.size;
-                    if (pass) {
-                        actual.forEach((v: any, k: any) => { pass = pass && util.equals(v, expected.get(k)); });
-                    }
-                    return pass;
-                } else {
-                    // TODO(misko): we should change the return, but jasmine.d.ts is not null safe
-                    // tslint:disable-next-line:no-non-null-assertion
-                    return undefined!;
-                }
-            }
-        },
-
-        toBePromise: function () {
+        toBePromise: function() {
             return {
-                compare: function (actual: any) {
+                compare: function(actual: any) {
                     const pass = typeof actual === 'object' && typeof actual.then === 'function';
-                    return { pass: pass, get message() { return 'Expected ' + actual + ' to be a promise'; } };
+                    return {
+                        pass: pass, get message() {
+                            return 'Expected ' + actual + ' to be a promise';
+                        }
+                    };
                 }
             };
         },
 
-        toBeAnInstanceOf: function () {
+        toBeAnInstanceOf: function() {
             return {
-                compare: function (actual: any, expectedClass: any) {
+                compare: function(actual: any, expectedClass: any) {
                     const pass = typeof actual === 'object' && actual instanceof expectedClass;
                     return {
                         pass: pass,
@@ -164,55 +148,30 @@ _global.beforeEach(function () {
             };
         },
 
-        toHaveText: function () {
+        toHaveText: function() {
             return {
-                compare: function (actual: any, expectedText: string) {
+                compare: function(actual: any, expectedText: string) {
                     const actualText = elementText(actual);
                     return {
                         pass: actualText === expectedText,
-                        get message() { return 'Expected ' + actualText + ' to be equal to ' + expectedText; }
-                    };
-                }
-            };
-        },
-
-        toHaveTrimmedText: function () {
-            return {
-                compare: function (actual: any, expectedText: string) {
-                    const actualText = elementText(actual).trim();
-                    return {
-                        pass: actualText === expectedText,
-                        get message() { return 'Expected ' + actualText + ' to be equal to ' + expectedText; }
-                    };
-                }
-            };
-        },
-
-        toHaveCssClass: function () {
-            return { compare: buildError(false), negativeCompare: buildError(true) };
-
-            function buildError(isNot: boolean) {
-                return function (actual: any, className: string) {
-                    return {
-                        pass: getDOM().hasClass(actual, className) === !isNot,
                         get message() {
-                            return `Expected ${actual.outerHTML} ${isNot ? 'not ' : ''}to contain the CSS class "${className}"`;
+                            return 'Expected ' + actualText + ' to be equal to ' + expectedText;
                         }
                     };
-                };
-            }
+                }
+            };
         },
 
-        toHaveCssStyle: function () {
+        toHaveCssStyle: function() {
             return {
-                compare: function (actual: any, styles: { [k: string]: string } | string) {
+                compare: function(actual: any, styles: { [k: string]: string } | string) {
                     let allPassed: boolean;
                     if (typeof styles === 'string') {
-                        allPassed = getDOM().hasStyle(actual, styles);
+                        allPassed = hasStyle(actual, styles);
                     } else {
                         allPassed = Object.keys(styles).length !== 0;
                         Object.keys(styles).forEach(prop => {
-                            allPassed = allPassed && getDOM().hasStyle(actual, prop, styles[prop]);
+                            allPassed = allPassed && hasStyle(actual, prop, styles[prop]);
                         });
                     }
 
@@ -221,28 +180,61 @@ _global.beforeEach(function () {
                         get message() {
                             const expectedValueStr = typeof styles === 'string' ? styles : JSON.stringify(styles);
                             return `Expected ${actual.outerHTML} ${!allPassed ? ' ' : 'not '}to contain the
-                      CSS ${typeof styles === 'string' ? 'property' : 'styles'} "${expectedValueStr}"`;
+                      CSS ${typeof styles === 'string' ? 'property' : 'styles'} "${
+                                expectedValueStr}"`;
                         }
                     };
                 }
             };
         },
 
-        toContainError: function () {
+        toHaveTrimmedText: function() {
             return {
-                compare: function (actual: any, expectedText: any) {
-                    const errorMessage = actual.toString();
+                compare: function(actual: any, expectedText: string) {
+                    const actualText = elementText(actual).trim();
                     return {
-                        pass: errorMessage.indexOf(expectedText) > -1,
-                        get message() { return 'Expected ' + errorMessage + ' to contain ' + expectedText; }
+                        pass: actualText === expectedText,
+                        get message() {
+                            return 'Expected ' + actualText + ' to be equal to ' + expectedText;
+                        }
                     };
                 }
             };
         },
 
-        toImplement: function () {
+
+        toContainError: function() {
             return {
-                compare: function (actualObject: any, expectedInterface: any) {
+                compare: function(actual: any, expectedText: any) {
+                    const errorMessage = actual.toString();
+                    return {
+                        pass: errorMessage.indexOf(expectedText) > -1,
+                        get message() {
+                            return 'Expected ' + errorMessage + ' to contain ' + expectedText;
+                        }
+                    };
+                }
+            };
+        },
+        toHaveCssClass: function() {
+            return {compare: buildError(false), negativeCompare: buildError(true)};
+
+            function buildError(isNot: boolean) {
+                return function(actual: any, className: string) {
+                    return {
+                        pass: hasClass(actual, className) == !isNot,
+                        get message() {
+                            return `Expected ${actual.outerHTML} ${
+                                isNot ? 'not ' : ''}to contain the CSS class "${className}"`;
+                        }
+                    };
+                };
+            }
+        },
+
+        toImplement: function() {
+            return {
+                compare: function(actualObject: any, expectedInterface: any) {
                     const intProps = Object.keys(expectedInterface.prototype);
 
                     const missedMethods: any[] = [];
@@ -263,9 +255,9 @@ _global.beforeEach(function () {
             };
         },
 
-        toHaveMap: function () {
+        toHaveMap: function() {
             return {
-                compare: function (actualObject: any, expected: { [k: string]: any }) {
+                compare: function(actualObject: any, expected: { [k: string]: any }) {
                     let pass = true;
                     let failureName = '';
                     for (const propertyName in expected) {
@@ -305,8 +297,8 @@ _global.beforeEach(function () {
 });
 
 function elementText(n: any): string {
-    const hasNodes = (node: any) => {
-        const children = getDOM().childNodes(node);
+    const hasNodes = (n: any) => {
+        const children = n.childNodes;
         return children && children.length > 0;
     };
 
@@ -314,22 +306,31 @@ function elementText(n: any): string {
         return n.map(elementText).join('');
     }
 
-    if (getDOM().isCommentNode(n)) {
+    if (isCommentNode(n)) {
         return '';
     }
 
-    if (getDOM().isElementNode(n) && getDOM().tagName(n) === 'CONTENT') {
-        return elementText(Array.prototype.slice.apply(getDOM().getDistributedNodes(n)));
+    if (getDOM().isElementNode(n)) {
+        const tagName = (n as Element).tagName;
+
+        if (tagName === 'CONTENT') {
+            return elementText(Array.prototype.slice.apply((<any> n).getDistributedNodes()));
+        } else if (tagName === 'SLOT') {
+            return elementText(Array.prototype.slice.apply((<any> n).assignedNodes()));
+        }
     }
 
-    if (getDOM().hasShadowRoot(n)) {
-        return elementText(getDOM().childNodesAsList(getDOM().getShadowRoot(n)));
+    if (hasShadowRoot(n)) {
+        return elementText(childNodesAsList((<any> n).shadowRoot));
     }
 
     if (hasNodes(n)) {
-        return elementText(getDOM().childNodesAsList(n));
+        return elementText(childNodesAsList(n));
     }
 
-    // tslint:disable-next-line:no-non-null-assertion
-    return getDOM().getText(n)!;
+    return (n as any).textContent;
+}
+
+function hasShadowRoot(node: any): boolean {
+    return node.shadowRoot != null && node instanceof HTMLElement;
 }

@@ -1,7 +1,7 @@
 <ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand"
   let-onCheckedChange="onCheckedChange">
-  <div class="form-inline row-item">
-    <i *ngIf="item.children" class="mr-1" (click)="onCollapseExpand()" aria-hidden="true" [ngSwitch]="item.collapsed">
+  <div class="d-flex flex-row align-items-center flex-wrap row-item">
+    <i *ngIf="item.children" class="me-1" (click)="onCollapseExpand()" aria-hidden="true" [ngSwitch]="item.collapsed">
       <svg *ngSwitchCase="true" width="0.8rem" height="0.8rem" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -19,7 +19,7 @@
       <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
         {{item.text}}
       </label>
-      <label class="form-check-label ml-2">
+      <label class="form-check-label ms-2">
         <i aria-hidden="true" title="Remove" (click)="removeItem(item)">
           <svg width="1rem" height="1rem" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
 </ul>
 <div class="row">
   <div class="col-6">
-    <div class="form-group">
+    <div class="mb-3">
       <div class="d-inline-block">
         <ngx-treeview [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)">
         </ngx-treeview>

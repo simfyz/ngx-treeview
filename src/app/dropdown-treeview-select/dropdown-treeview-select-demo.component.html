@@ -12,15 +12,15 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <div class="form-group">
-      <button class="btn btn-secondary mr-1" (click)="loadBooks1()">Load books 1</button>
+    <div class="mb-3">
+      <button class="btn btn-secondary me-1" (click)="loadBooks1()">Load books 1</button>
       <button class="btn btn-secondary" (click)="loadBooks2()">Load books 2</button>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-12">
-    <div class="form-group">
+    <div class="mb-3">
       <div class="d-inline-block">
         <ngx-dropdown-treeview-select [items]="items" [(value)]="value" (valueChange)="onValueChange($event)">
         </ngx-dropdown-treeview-select>

@@ -48,7 +48,7 @@ export function queryCollapseExpandIcon(debugElement: DebugElement): DebugElemen
 }
 
 export function queryDivider(debugElement: DebugElement): DebugElement {
-  return debugElement.query(By.css('.treeview-header .dropdown-divider'));
+  return debugElement.query(By.css('.treeview-header hr'));
 }
 
 export function queryItemCheckboxes(debugElement: DebugElement): DebugElement[] {

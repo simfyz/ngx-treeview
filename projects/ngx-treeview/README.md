@@ -6,7 +6,7 @@ An Angular treeview component with checkbox
 
 - [Angular](https://angular.io)
 - [Lodash](https://lodash.com)
-- [Bootstrap 4](https://getbootstrap.com)
+- [Bootstrap 5](https://getbootstrap.com)
 
 This component is currently supporting Bootstrap 4. If you are using Bootstrap 4 alpha 6, please downgrade to the older version 1.0.10.
 

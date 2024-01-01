@@ -21,7 +21,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -29,7 +28,13 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -59,7 +64,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -95,29 +101,35 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "devServerTarget": "angular-ngx-treeview:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-ngx-treeview:serve:production"
+            }
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "angular-ngx-treeview:serve"
           },
           "configurations": {
             "production": {
               "devServerTarget": "angular-ngx-treeview:serve:production"
             }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
           }
         }
       }
@@ -148,20 +160,47 @@
             "karmaConfig": "projects/ngx-treeview/karma.conf.js"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "tsConfig": [
-              "projects/ngx-treeview/tsconfig.lib.json",
-              "projects/ngx-treeview/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "devServerTarget": "ngx-treeview:serve",
+            "configFile": "projects/ngx-treeview/cypress.config.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-treeview:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/ngx-treeview/cypress.config.js"
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "ngx-treeview:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-treeview:serve:production"
+            }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-ngx-treeview"
+  "cli": {
+    "analytics": "8b3a9967-66f3-4660-bb07-7405a52175d8",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
+  }
 }
