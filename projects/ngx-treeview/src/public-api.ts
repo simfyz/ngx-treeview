@@ -2,7 +2,7 @@
  * Public API Surface of ngx-treeview
  */
 
-export * from './lib/treeview.module';
+export * from './lib/providers/defaut-config.provider';
 export * from './lib/components/treeview/treeview.component';
 export * from './lib/components/dropdown-treeview/dropdown-treeview.component';
 export * from './lib/pipes/treeview.pipe';

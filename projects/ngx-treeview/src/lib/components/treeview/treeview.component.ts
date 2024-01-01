@@ -7,6 +7,9 @@ import { TreeviewHeaderTemplateContext } from '../../models/treeview-header-temp
 import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
 import { TreeviewHelper } from '../../helpers/treeview-helper';
 import { TreeviewEventParser } from '../../helpers/treeview-event-parser';
+import { TreeviewItemComponent } from '../treeview-item/treeview-item.component';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, NgFor } from '@angular/common';
 
 class FilterTreeviewItem extends TreeviewItem {
   private readonly refItem: TreeviewItem;
@@ -43,9 +46,11 @@ class FilterTreeviewItem extends TreeviewItem {
 }
 
 @Component({
-  selector: 'ngx-treeview',
-  templateUrl: './treeview.component.html',
-  styleUrls: ['./treeview.component.scss']
+    selector: 'ngx-treeview',
+    templateUrl: './treeview.component.html',
+    styleUrls: ['./treeview.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgSwitch, NgSwitchCase, FormsModule, NgTemplateOutlet, NgFor, TreeviewItemComponent]
 })
 export class TreeviewComponent implements OnChanges, OnInit {
   @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;

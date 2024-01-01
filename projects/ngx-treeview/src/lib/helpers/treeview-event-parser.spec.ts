@@ -1,10 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { TreeviewItem, TreeviewSelection } from '../models/treeview-item';
-import { TreeviewComponent } from '../components/treeview/treeview.component';
-import { TreeviewModule } from '../treeview.module';
-import {
-  TreeviewEventParser, DefaultTreeviewEventParser, DownlineTreeviewEventParser, OrderDownlineTreeviewEventParser
-} from './treeview-event-parser';
+import {TestBed} from '@angular/core/testing';
+import {TreeviewItem, TreeviewSelection} from '../models/treeview-item';
+import {TreeviewComponent} from '../components/treeview/treeview.component';
+import {DefaultTreeviewEventParser, DownlineTreeviewEventParser, OrderDownlineTreeviewEventParser, TreeviewEventParser} from 'ngx-treeview';
 
 const selectionWithUndefinedCheckedItems: TreeviewSelection = {
   checkedItems: undefined,
@@ -22,9 +19,6 @@ describe('DefaultTreeviewEventParser', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TreeviewModule.forRoot()
-      ],
       providers: [
         { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
       ]
@@ -66,9 +60,6 @@ describe('DownlineTreeviewEventParser', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TreeviewModule.forRoot()
-      ],
       providers: [
         { provide: TreeviewEventParser, useClass: DownlineTreeviewEventParser }
       ]
@@ -127,9 +118,6 @@ describe('OrderDownlineTreeviewEventParser', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TreeviewModule.forRoot()
-      ],
       providers: [
         { provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser }
       ]

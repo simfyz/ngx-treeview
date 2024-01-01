@@ -11,10 +11,10 @@
     overflow: hidden;
     padding-right: 30px;
     text-overflow: ellipsis;
-    border-top: .35em solid;
-    border-right: .35em solid transparent;
-    border-left: .35em solid transparent;
     &::after {
+      border-top: .35em solid;
+      border-right: .35em solid transparent;
+      border-left: .35em solid transparent;
       position: absolute;
       right: .75rem;
       margin-top: 0.6rem;

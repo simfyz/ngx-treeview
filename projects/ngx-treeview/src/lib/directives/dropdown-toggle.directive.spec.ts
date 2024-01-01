@@ -7,8 +7,11 @@ import { DropdownDirective } from './dropdown.directive';
 import { expect, createGenericTestComponent } from '../../testing';
 
 @Component({
-  selector: 'ngx-test',
-  template: ''
+    selector: 'ngx-test',
+    template: '',
+    standalone: true,
+    imports: [FormsModule,
+        BrowserModule]
 })
 class TestComponent { }
 
@@ -21,16 +24,14 @@ describe('DropdownToggleDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         FormsModule,
-        BrowserModule
-      ],
-      declarations: [
+        BrowserModule,
         TestComponent,
         DropdownDirective,
         DropdownToggleDirective
-      ]
-    });
+    ]
+});
   });
 
   beforeEach(() => {

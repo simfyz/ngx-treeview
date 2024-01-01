@@ -3,11 +3,14 @@ import { isNil } from 'lodash';
 import { TreeviewItem } from '../../models/treeview-item';
 import { TreeviewConfig } from '../../models/treeview-config';
 import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
+import { NgIf, NgTemplateOutlet, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'ngx-treeview-item',
-  templateUrl: './treeview-item.component.html',
-  styleUrls: ['./treeview-item.component.scss']
+    selector: 'ngx-treeview-item',
+    templateUrl: './treeview-item.component.html',
+    styleUrls: ['./treeview-item.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, NgFor]
 })
 export class TreeviewItemComponent {
   @Input() config: TreeviewConfig;

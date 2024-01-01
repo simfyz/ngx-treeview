@@ -17,8 +17,11 @@ const fakeData: FakeData = {
 };
 
 @Component({
-  selector: 'ngx-test',
-  template: ''
+    selector: 'ngx-test',
+    template: '',
+    standalone: true,
+    imports: [FormsModule,
+        BrowserModule]
 })
 class TestComponent {
   open = fakeData.open;
@@ -32,16 +35,14 @@ describe('DropdownToggleDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         FormsModule,
-        BrowserModule
-      ],
-      declarations: [
+        BrowserModule,
         TestComponent,
         DropdownToggleDirective,
         DropdownDirective
-      ]
-    });
+    ]
+});
   });
 
   it('should not have class "show" by default', () => {

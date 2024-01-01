@@ -10,7 +10,6 @@ import {TreeviewItem} from '../../models/treeview-item';
 import {DefaultTreeviewI18n, TreeviewI18n} from '../../models/treeview-i18n';
 import {DefaultTreeviewEventParser, TreeviewEventParser} from '../../helpers/treeview-event-parser';
 import {createGenericTestComponent, expect} from '../../../testing';
-import {TreeviewModule} from 'ngx-treeview';
 
 interface FakeData {
     config: TreeviewConfig;
@@ -30,7 +29,10 @@ const fakeData: FakeData = {
 
 @Component({
     selector: 'ngx-test',
-    template: ''
+    template: '',
+    standalone: true,
+    imports: [FormsModule,
+        BrowserModule]
 })
 class TestComponent {
     config = fakeData.config;
@@ -49,22 +51,20 @@ describe('DropdownTreeviewComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FormsModule,
-                BrowserModule,
-            ],
-            declarations: [
-                TestComponent,
-                TreeviewComponent,
-                TreeviewItemComponent,
-                DropdownTreeviewComponent
-            ],
-            providers: [
-                TreeviewConfig,
-                {provide: TreeviewI18n, useClass: DefaultTreeviewI18n},
-                {provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser}
-            ]
-        });
+    imports: [
+        FormsModule,
+        BrowserModule,
+        TestComponent,
+        TreeviewComponent,
+        TreeviewItemComponent,
+        DropdownTreeviewComponent,
+    ],
+    providers: [
+        TreeviewConfig,
+        { provide: TreeviewI18n, useClass: DefaultTreeviewI18n },
+        { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
+    ]
+});
         spy = spyOn(fakeData, 'selectedChange');
     });
 

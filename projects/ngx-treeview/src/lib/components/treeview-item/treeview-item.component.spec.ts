@@ -25,6 +25,9 @@ const testTemplate = fakeItemTemplate
 @Component({
     selector: 'ngx-test',
     template: '',
+    standalone: true,
+    imports: [FormsModule,
+        BrowserModule],
 })
 class TestComponent {
     item = fakeData.item;
@@ -37,16 +40,14 @@ const createTestComponent = (html: string) =>
 describe('TreeviewItemComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FormsModule,
-                BrowserModule
-            ],
-            declarations: [
-                TestComponent,
-                TreeviewItemComponent
-            ],
-            providers: [TreeviewConfig]
-        });
+    imports: [
+        FormsModule,
+        BrowserModule,
+        TestComponent,
+        TreeviewItemComponent
+    ],
+    providers: [TreeviewConfig]
+});
     });
 
     it('should initialize with default config', () => {

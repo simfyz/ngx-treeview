@@ -23,8 +23,11 @@ const fakeData: FakeData = {
 };
 
 @Component({
-  selector: 'ngx-test',
-  template: ''
+    selector: 'ngx-test',
+    template: '',
+    standalone: true,
+    imports: [FormsModule,
+        BrowserModule]
 })
 class TestComponent {
   config = fakeData.config;
@@ -66,21 +69,19 @@ describe('TreeviewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         FormsModule,
-        BrowserModule
-      ],
-      declarations: [
+        BrowserModule,
         TestComponent,
         TreeviewComponent,
         TreeviewItemComponent
-      ],
-      providers: [
+    ],
+    providers: [
         TreeviewConfig,
         { provide: TreeviewI18n, useClass: DefaultTreeviewI18n },
         { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
-      ]
-    });
+    ]
+});
     selectedChangeSpy = spyOn(fakeData, 'selectedChange');
   });
 

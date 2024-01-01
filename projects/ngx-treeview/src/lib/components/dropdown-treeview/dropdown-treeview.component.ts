@@ -5,11 +5,16 @@ import { TreeviewConfig } from '../../models/treeview-config';
 import { TreeviewComponent } from '../treeview/treeview.component';
 import { TreeviewHeaderTemplateContext } from '../../models/treeview-header-template-context';
 import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
+import { DropdownMenuDirective } from '../../directives/dropdown-menu.directive';
+import { DropdownToggleDirective } from '../../directives/dropdown-toggle.directive';
+import { DropdownDirective } from '../../directives/dropdown.directive';
 
 @Component({
-  selector: 'ngx-dropdown-treeview',
-  templateUrl: './dropdown-treeview.component.html',
-  styleUrls: ['./dropdown-treeview.component.scss']
+    selector: 'ngx-dropdown-treeview',
+    templateUrl: './dropdown-treeview.component.html',
+    styleUrls: ['./dropdown-treeview.component.scss'],
+    standalone: true,
+    imports: [DropdownDirective, DropdownToggleDirective, DropdownMenuDirective, TreeviewComponent]
 })
 export class DropdownTreeviewComponent {
   @Input() buttonClass = 'btn-outline-secondary';

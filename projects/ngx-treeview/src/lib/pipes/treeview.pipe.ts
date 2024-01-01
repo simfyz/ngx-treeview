@@ -3,7 +3,8 @@ import { isNil } from 'lodash';
 import { TreeviewItem } from '../models/treeview-item';
 
 @Pipe({
-  name: 'ngxTreeview'
+    name: 'ngxTreeview',
+    standalone: true
 })
 export class TreeviewPipe implements PipeTransform {
   transform(objects: any[], textField: string): TreeviewItem[] {
