@@ -18,7 +18,7 @@ export class BookComponent implements OnInit {
     hasFilter: true,
     hasCollapseExpand: true,
     decoupleChildFromParent: false,
-    maxHeight: 400
+    maxHeight: 250
   });
 
   buttonClasses = [

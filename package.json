@@ -1,6 +1,6 @@
 {
   "name": "@simfyz/ngx-treeview",
-  "version": "0.0.0",
+  "version": "1.0.3",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {

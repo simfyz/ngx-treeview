@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TreeviewConfig {
   hasAllCheckBox = true;
-  hasFilter = false;
-  hasCollapseExpand = false;
+  hasFilter = true;
+  hasCollapseExpand = true;
   decoupleChildFromParent = false;
-  maxHeight = 500;
+  maxHeight = 250;
 
   get hasDivider(): boolean {
     return this.hasFilter || this.hasAllCheckBox || this.hasCollapseExpand;

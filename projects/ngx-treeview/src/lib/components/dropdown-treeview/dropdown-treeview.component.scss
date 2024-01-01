@@ -1,22 +1,38 @@
-.dropdown {
+@import "bootstrap/scss/bootstrap";
+
+.ngx-dropdown {
   width: 100%;
   display: inline-block;
-  button {
+
+  .ngx-dropdown-button {
     width: 100%;
     margin-right: 0.9rem;
     text-align: left;
     overflow: hidden;
     padding-right: 30px;
     text-overflow: ellipsis;
+    border-top: .35em solid;
+    border-right: .35em solid transparent;
+    border-left: .35em solid transparent;
     &::after {
       position: absolute;
-      right: 0.6rem;
+      right: .75rem;
       margin-top: 0.6rem;
     }
   }
+
   .dropdown-menu {
+    width: 100%;
     .dropdown-container {
       padding: 0 0.6rem;
     }
+  }
+}
+
+.ngx-dropdown-button {
+  &:focus,
+  &:active,
+  &:hover {
+    border-color: $input-focus-border-color;
   }
 }

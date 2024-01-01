@@ -82,7 +82,7 @@ export class AppModule {
    hasFilter: false,
    hasCollapseExpand: false,
    decoupleChildFromParent: false,
-   maxHeight: 500
+   maxHeight: 300
 }
 ```
 
