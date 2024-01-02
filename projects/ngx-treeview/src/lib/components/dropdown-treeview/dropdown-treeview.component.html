@@ -1,6 +1,10 @@
 <div class="dropdown ngx-dropdown" ngxDropdown>
   <div class="ngx-dropdown-button" role="button" ngxDropdownToggle>
-    {{ buttonLabel ?? '&nbsp;' }}
+    @if (buttonLabel) {
+      {{ buttonLabel }}
+    } @else {
+      &nbsp;
+    }
   </div>
   <div ngxDropdownMenu aria-labelledby="dropdownMenu" (click)="$event.stopPropagation()">
     <div class="dropdown-container">
