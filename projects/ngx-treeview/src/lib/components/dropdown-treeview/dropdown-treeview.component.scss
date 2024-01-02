@@ -1,4 +1,5 @@
-@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
 
 .ngx-dropdown {
   width: 100%;
@@ -6,11 +7,21 @@
 
   .ngx-dropdown-button {
     width: 100%;
-    margin-right: 0.9rem;
     text-align: left;
     overflow: hidden;
-    padding-right: 30px;
+    padding: $input-padding-y $input-padding-x;
     text-overflow: ellipsis;
+    display: block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
     &::after {
       border-top: .35em solid;
       border-right: .35em solid transparent;
@@ -23,6 +34,7 @@
 
   .dropdown-menu {
     width: 100%;
+    border: $border-width solid $border-color;
     .dropdown-container {
       padding: 0 0.6rem;
     }

@@ -1,6 +1,6 @@
 <div class="dropdown ngx-dropdown" ngxDropdown>
-  <div class="form-control ngx-dropdown-button" role="button" ngxDropdownToggle>
-    {{buttonLabel}}
+  <div class="ngx-dropdown-button" role="button" ngxDropdownToggle>
+    {{ buttonLabel ?? '&nbsp;' }}
   </div>
   <div ngxDropdownMenu aria-labelledby="dropdownMenu" (click)="$event.stopPropagation()">
     <div class="dropdown-container">

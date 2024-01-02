@@ -13,7 +13,7 @@ import {DropdownTreeviewSelectModule} from './dropdown-treeview-select';
 import {I18n} from './i18n';
 import {DisabledOnSelectorDirective} from './disabled-on-selector.directive';
 import {provideNgxTreeViewConfig} from '../../projects/ngx-treeview/src/lib/providers/defaut-config.provider';
-import {DropdownTreeviewComponent, TreeviewComponent} from 'ngx-treeview';
+import {DropdownTreeviewComponent, TreeviewComponent, TreeviewConfig} from 'ngx-treeview';
 
 @NgModule({
   imports: [
@@ -35,6 +35,7 @@ import {DropdownTreeviewComponent, TreeviewComponent} from 'ngx-treeview';
     DisabledOnSelectorDirective
   ],
   providers: [
+    TreeviewConfig,
     provideNgxTreeViewConfig(),
     I18n
   ],
