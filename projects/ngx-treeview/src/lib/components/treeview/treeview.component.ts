@@ -1,15 +1,15 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef, OnInit } from '@angular/core';
-import { isNil, includes } from 'lodash';
-import { TreeviewI18n } from '../../models/treeview-i18n';
-import { TreeviewItem, TreeviewSelection } from '../../models/treeview-item';
-import { TreeviewConfig } from '../../models/treeview-config';
-import { TreeviewHeaderTemplateContext } from '../../models/treeview-header-template-context';
-import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
-import { TreeviewHelper } from '../../helpers/treeview-helper';
-import { TreeviewEventParser } from '../../helpers/treeview-event-parser';
-import { TreeviewItemComponent } from '../treeview-item/treeview-item.component';
-import { FormsModule } from '@angular/forms';
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, NgFor } from '@angular/common';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {includes, isNil} from 'lodash';
+import {TreeviewI18n} from '../../models/treeview-i18n';
+import {TreeviewItem, TreeviewSelection} from '../../models/treeview-item';
+import {TreeviewConfig} from '../../models/treeview-config';
+import {TreeviewHeaderTemplateContext} from '../../models/treeview-header-template-context';
+import {TreeviewItemTemplateContext} from '../../models/treeview-item-template-context';
+import {TreeviewHelper} from '../../helpers/treeview-helper';
+import {TreeviewEventParser} from '../../helpers/treeview-event-parser';
+import {TreeviewItemComponent} from '../treeview-item/treeview-item.component';
+import {FormsModule} from '@angular/forms';
+import {NgTemplateOutlet} from '@angular/common';
 
 class FilterTreeviewItem extends TreeviewItem {
   private readonly refItem: TreeviewItem;
@@ -50,7 +50,7 @@ class FilterTreeviewItem extends TreeviewItem {
     templateUrl: './treeview.component.html',
     styleUrls: ['./treeview.component.scss'],
     standalone: true,
-    imports: [NgIf, NgSwitch, NgSwitchCase, FormsModule, NgTemplateOutlet, NgFor, TreeviewItemComponent]
+  imports: [FormsModule, NgTemplateOutlet, TreeviewItemComponent]
 })
 export class TreeviewComponent implements OnChanges, OnInit {
   @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;

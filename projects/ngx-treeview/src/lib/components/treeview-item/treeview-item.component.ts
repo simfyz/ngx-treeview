@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { isNil } from 'lodash';
-import { TreeviewItem } from '../../models/treeview-item';
-import { TreeviewConfig } from '../../models/treeview-config';
-import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
-import { NgIf, NgTemplateOutlet, NgFor } from '@angular/common';
+import {Component, EventEmitter, Input, Output, TemplateRef} from '@angular/core';
+import {isNil} from 'lodash';
+import {TreeviewItem} from '../../models/treeview-item';
+import {TreeviewConfig} from '../../models/treeview-config';
+import {TreeviewItemTemplateContext} from '../../models/treeview-item-template-context';
+import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
     selector: 'ngx-treeview-item',
     templateUrl: './treeview-item.component.html',
     styleUrls: ['./treeview-item.component.scss'],
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, NgFor]
+  imports: [NgTemplateOutlet]
 })
 export class TreeviewItemComponent {
   @Input() config: TreeviewConfig;

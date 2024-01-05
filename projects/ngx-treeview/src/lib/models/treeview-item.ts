@@ -1,5 +1,5 @@
-import { isBoolean, isNil, isString } from 'lodash';
-import { TreeviewHelper } from '../helpers/treeview-helper';
+import {isBoolean, isNil, isString} from 'lodash';
+import {TreeviewHelper} from '../helpers/treeview-helper';
 
 export interface TreeviewSelection {
   checkedItems: TreeviewItem[];
@@ -44,10 +44,6 @@ export class TreeviewItem {
     }
     if (!isNil(item.children) && item.children.length > 0) {
       this.children = item.children.map(child => {
-        if (this.disabled === true) {
-          child.disabled = true;
-        }
-
         return new TreeviewItem(child);
       });
     }

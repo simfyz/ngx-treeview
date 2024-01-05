@@ -16,11 +16,17 @@
     line-height: 1.5;
     color: var(--bs-body-color);
     appearance: none;
-    background-color: var(--bs-body-bg);
+    background-color: $white;
     background-clip: padding-box;
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border-color: $input-focus-border-color;
+    }
 
     &::after {
       border-top: .35em solid;
@@ -35,16 +41,9 @@
   .dropdown-menu {
     width: 100%;
     border: $border-width solid $border-color;
+
     .dropdown-container {
       padding: 0 0.6rem;
     }
-  }
-}
-
-.ngx-dropdown-button {
-  &:focus,
-  &:active,
-  &:hover {
-    border-color: $input-focus-border-color;
   }
 }
