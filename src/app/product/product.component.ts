@@ -1,10 +1,18 @@
-import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
-import { isNil, remove, reverse } from 'lodash';
+import {Component, Injectable, OnInit, ViewChild, inject} from '@angular/core';
+import {isNil, remove, reverse} from 'lodash';
 import {
-  TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
-  TreeviewEventParser, OrderDownlineTreeviewEventParser, DownlineTreeviewItem
+  DownlineTreeviewItem,
+  OrderDownlineTreeviewEventParser,
+  TreeviewComponent,
+  TreeviewConfig,
+  TreeviewEventParser,
+  TreeviewHelper,
+  TreeviewItem
 } from 'ngx-treeview';
-import { ProductService } from './product.service';
+import {ProductService} from './product.service';
+
+import {FormsModule} from '@angular/forms';
+import {TreeviewComponent as TreeviewComponent_1} from '../../../projects/ngx-treeview/src/lib/components/treeview/treeview.component';
 
 @Injectable()
 export class ProductTreeviewConfig extends TreeviewConfig {
@@ -20,18 +28,17 @@ export class ProductTreeviewConfig extends TreeviewConfig {
   templateUrl: './product.component.html',
   providers: [
     ProductService,
-    { provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser },
-    { provide: TreeviewConfig, useClass: ProductTreeviewConfig }
-  ]
+    {provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser},
+    {provide: TreeviewConfig, useClass: ProductTreeviewConfig}
+  ],
+  imports: [FormsModule, TreeviewComponent_1]
 })
 export class ProductComponent implements OnInit {
-  @ViewChild(TreeviewComponent, { static: false }) treeviewComponent: TreeviewComponent;
+  private service = inject(ProductService);
+
+  @ViewChild(TreeviewComponent, {static: false}) treeviewComponent: TreeviewComponent;
   items: TreeviewItem[];
   rows: string[];
-
-  constructor(
-    private service: ProductService
-  ) { }
 
   ngOnInit(): void {
     this.items = this.service.getProducts();

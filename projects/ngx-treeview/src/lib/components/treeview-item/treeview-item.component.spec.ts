@@ -25,9 +25,8 @@ const testTemplate = fakeItemTemplate
 @Component({
     selector: 'ngx-test',
     template: '',
-    standalone: true,
     imports: [FormsModule,
-        BrowserModule],
+        BrowserModule]
 })
 class TestComponent {
     item = fakeData.item;

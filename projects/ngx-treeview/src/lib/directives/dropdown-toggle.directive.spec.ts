@@ -9,7 +9,6 @@ import { expect, createGenericTestComponent } from '../../testing';
 @Component({
     selector: 'ngx-test',
     template: '',
-    standalone: true,
     imports: [FormsModule,
         BrowserModule]
 })

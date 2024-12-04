@@ -4,7 +4,7 @@
   <li>Exposing all of configuration of ngx-treeview & ngx-dropdown-treeview</li>
   <li>There is no option to disable ngx-treeview & ngx-dropdown-treeview but you can implement it easily with a
     <a href="https://github.com/leovo2708/ngx-treeview/blob/master/src/app/disabled-on-selector.directive.ts"
-      target="_blank">Angular directive</a>
+       target="_blank">Angular directive</a>
   </li>
 </ul>
 <div class="row">
@@ -30,19 +30,19 @@
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasCollapseExpand"
-              id="hasCollapseExpand">
+                   id="hasCollapseExpand">
             <label class="form-check-label" for="hasCollapseExpand">hasCollapseExpand</label>
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" [(ngModel)]="config.decoupleChildFromParent"
-              id="decoupleChildFromParent">
+                   id="decoupleChildFromParent">
             <label class="form-check-label" for="decoupleChildFromParent">decoupleChildFromParent</label>
           </div>
           <div class="d-flex flex-row align-items-center flex-wrap">
             <div class="mb-3">
               <label for="maxHeight">maxHeight</label>
               <input type="text" class="form-control mx-sm-3" id="maxHeight" placeholder="maxHeight"
-                [(ngModel)]="config.maxHeight">
+                     [(ngModel)]="config.maxHeight">
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <strong>ngx-treeview</strong>
           </label>
           <ngx-treeview [config]="config" [items]="items" (filterChange)="onFilterChange($event)"
-            (selectedChange)="values = $event">
+                        (selectedChange)="values = $event">
           </ngx-treeview>
         </div>
       </div>
@@ -70,12 +70,14 @@
           <div class="mb-3 d-flex flex-row align-items-center flex-wrap">
             <label>buttonClass</label>
             <select class="form-control mx-sm-3" [(ngModel)]="buttonClass">
-              <option *ngFor="let c of buttonClasses" [value]="c">{{c}}</option>
+              @for (c of buttonClasses; track c) {
+                <option [value]="c">{{c}}</option>
+              }
             </select>
           </div>
           <ngx-dropdown-treeview [config]="config" [items]="items" [buttonClass]="buttonClass"
-            (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
-            [ngxDisabledOnSelector]="'button.dropdown-toggle'" (filterChange)="onFilterChange($event)">
+                                 (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
+                                 [ngxDisabledOnSelector]="'button.dropdown-toggle'" (filterChange)="onFilterChange($event)">
           </ngx-dropdown-treeview>
         </div>
       </div>

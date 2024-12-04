@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import {Injectable, inject} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
 import cities from './cities.json';
 
 export interface City {
@@ -11,9 +11,8 @@ export interface City {
 
 @Injectable()
 export class CityService {
-  constructor(
-    private httpClient: HttpClient
-  ) { }
+  private httpClient = inject(HttpClient);
+
 
   getCities(): Observable<City[]> {
     if (location.hostname === 'localhost') {

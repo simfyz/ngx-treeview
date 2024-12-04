@@ -1,10 +1,9 @@
-import { Directive, Input, Output, HostBinding, HostListener, EventEmitter } from '@angular/core';
-import { isNil } from 'lodash';
+import {Directive, Input, Output, HostBinding, HostListener, EventEmitter} from '@angular/core';
+import {isNil} from 'lodash';
 
 @Directive({
-    selector: '[ngxDropdown]',
-    exportAs: 'ngxDropdown',
-    standalone: true
+  selector: '[ngxDropdown]',
+  exportAs: 'ngxDropdown'
 })
 export class DropdownDirective {
   toggleElement: any;

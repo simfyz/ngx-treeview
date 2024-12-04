@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { TreeviewItem } from 'ngx-treeview';
-import { Observable, of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {TreeviewItem} from 'ngx-treeview';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class RoomService {

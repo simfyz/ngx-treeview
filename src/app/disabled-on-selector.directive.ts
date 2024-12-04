@@ -1,16 +1,17 @@
-import { Directive, Input, OnChanges, ElementRef, Renderer2 } from '@angular/core';
+import {Directive, Input, OnChanges, ElementRef, Renderer2, inject} from '@angular/core';
 
-@Directive({
-  selector: '[ngxDisabledOnSelector]'
-})
+@Directive({selector: '[ngxDisabledOnSelector]'})
 export class DisabledOnSelectorDirective implements OnChanges {
+  private el = inject(ElementRef);
+  private renderer2 = inject(Renderer2);
+
   @Input() ngxDisabledOnSelector: string;
   @Input() disabled: boolean;
   private readonly nativeElement: HTMLElement;
 
-  constructor(
-    private el: ElementRef,
-    private renderer2: Renderer2) {
+  constructor() {
+    const el = this.el;
+
     this.nativeElement = el.nativeElement;
   }
 

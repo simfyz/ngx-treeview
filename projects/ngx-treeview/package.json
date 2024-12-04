@@ -1,6 +1,6 @@
 {
   "name": "@simfyz/ngx-treeview",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "keywords": [
@@ -25,8 +25,8 @@
     "url": "https://github.com/simfyz/ngx-treeview/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
+    "@angular/common": ">=17.0.0",
+    "@angular/core": ">=17.0.0",
     "lodash": "^4.0.0"
   },
   "dependencies": {

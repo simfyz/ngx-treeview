@@ -6,22 +6,25 @@
   <li>How to get unchecked items</li>
   <li>i18n</li>
 </ul>
-<div class="row" *ngIf="cities">
-  <div class="col-12">
-    <div class="alert alert-success" role="alert">
-      Selected cities: {{selectedCities | json}}
-    </div>
-    <div class="alert alert-secondary" role="alert">
-      Unselected cities: {{unselectedCities | json}}
-    </div>
-  </div>
-  <div class="col-12">
-    <form class="d-inline-block">
-      <label class="col-form-label me-sm-2">City category</label>
-      <div class="d-inline-block">
-        <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" [buttonClass]="'btn-outline-primary'" (selectedChange)="onSelectedChange($event)">
-        </ngx-dropdown-treeview>
+@if (cities) {
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-success" role="alert">
+        Selected cities: {{selectedCities | json}}
       </div>
-    </form>
+      <div class="alert alert-secondary" role="alert">
+        Unselected cities: {{unselectedCities | json}}
+      </div>
+    </div>
+    <div class="col-12">
+      <form class="d-inline-block">
+        <label class="col-form-label me-sm-2">City category</label>
+        <div class="d-inline-block">
+          <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" [buttonClass]="'btn-outline-primary'"
+                                 (selectedChange)="onSelectedChange($event)">
+          </ngx-dropdown-treeview>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+}

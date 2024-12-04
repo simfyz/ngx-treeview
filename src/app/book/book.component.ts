@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { TreeviewItem, TreeviewConfig } from 'ngx-treeview';
-import { BookService } from './book.service';
+import {Component, OnInit, inject} from '@angular/core';
+import {TreeviewItem, TreeviewConfig} from 'ngx-treeview';
+import {BookService} from './book.service';
+import {FormsModule} from '@angular/forms';
+import {TreeviewComponent} from '../../../projects/ngx-treeview/src/lib/components/treeview/treeview.component';
+
+import {DropdownTreeviewComponent} from '../../../projects/ngx-treeview/src/lib/components/dropdown-treeview/dropdown-treeview.component';
+import {DisabledOnSelectorDirective} from '../disabled-on-selector.directive';
 
 @Component({
   selector: 'ngx-book',
   templateUrl: './book.component.html',
   providers: [
     BookService
-  ]
+  ],
+  imports: [FormsModule, TreeviewComponent, DropdownTreeviewComponent, DisabledOnSelectorDirective]
 })
 export class BookComponent implements OnInit {
+  private service = inject(BookService);
+
   dropdownEnabled = true;
   items: TreeviewItem[];
   values: number[];
@@ -32,10 +40,6 @@ export class BookComponent implements OnInit {
     'btn-outline-dark'
   ];
   buttonClass = this.buttonClasses[0];
-
-  constructor(
-    private service: BookService
-  ) { }
 
   ngOnInit(): void {
     this.items = this.service.getBooks();

@@ -30,7 +30,6 @@ const fakeData: FakeData = {
 @Component({
     selector: 'ngx-test',
     template: '',
-    standalone: true,
     imports: [FormsModule,
         BrowserModule]
 })

@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { TreeviewItem, TreeviewConfig } from 'ngx-treeview';
-import { BookService } from '../book/book.service';
+import {Component, OnInit, inject} from '@angular/core';
+import {TreeviewItem, TreeviewConfig} from 'ngx-treeview';
+import {BookService} from '../book/book.service';
+import {DropdownTreeviewSelectComponent} from './dropdown-treeview-select.component';
 
 @Component({
   selector: 'ngx-dropdown-treeview-select-demo',
   templateUrl: './dropdown-treeview-select-demo.component.html',
   providers: [
     BookService
-  ]
+  ],
+  imports: [DropdownTreeviewSelectComponent]
 })
 export class DropdownTreeviewSelectDemoComponent implements OnInit {
+  private bookService = inject(BookService);
+
   value = 11;
   items: TreeviewItem[];
   config = TreeviewConfig.create({
     hasFilter: true,
     hasCollapseExpand: true
   });
-
-  constructor(
-    private bookService: BookService
-  ) { }
 
   ngOnInit(): void {
     this.items = this.bookService.getBooks();

@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core';
-import { TreeviewItem, TreeviewSelection, TreeviewI18n } from 'ngx-treeview';
-import { I18n } from './i18n';
+import {Injectable, inject} from '@angular/core';
+import {TreeviewItem, TreeviewSelection, TreeviewI18n} from 'ngx-treeview';
+import {I18n} from './i18n';
 
 @Injectable()
 export class DefaultTreeviewI18n extends TreeviewI18n {
-  constructor(
-    protected i18n: I18n
-  ) {
-    super();
-  }
+  protected i18n = inject(I18n);
+
 
   getText(selection: TreeviewSelection): string {
     if (selection.uncheckedItems.length === 0) {

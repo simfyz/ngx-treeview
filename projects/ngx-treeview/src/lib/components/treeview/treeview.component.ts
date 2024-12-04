@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef} from '@angular/core';
 import {includes, isNil} from 'lodash';
 import {TreeviewI18n} from '../../models/treeview-i18n';
 import {TreeviewItem, TreeviewSelection} from '../../models/treeview-item';
@@ -13,6 +13,7 @@ import {NgTemplateOutlet} from '@angular/common';
 
 class FilterTreeviewItem extends TreeviewItem {
   private readonly refItem: TreeviewItem;
+
   constructor(item: TreeviewItem) {
     super({
       text: item.text,
@@ -46,13 +47,16 @@ class FilterTreeviewItem extends TreeviewItem {
 }
 
 @Component({
-    selector: 'ngx-treeview',
-    templateUrl: './treeview.component.html',
-    styleUrls: ['./treeview.component.scss'],
-    standalone: true,
+  selector: 'ngx-treeview',
+  templateUrl: './treeview.component.html',
+  styleUrls: ['./treeview.component.scss'],
   imports: [FormsModule, NgTemplateOutlet, TreeviewItemComponent]
 })
 export class TreeviewComponent implements OnChanges, OnInit {
+  i18n = inject(TreeviewI18n);
+  private defaultConfig = inject(TreeviewConfig);
+  private eventParser = inject(TreeviewEventParser);
+
   @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
   @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
   @Input() items: TreeviewItem[];
@@ -65,13 +69,9 @@ export class TreeviewComponent implements OnChanges, OnInit {
   filterItems: TreeviewItem[];
   selection: TreeviewSelection;
 
-  constructor(
-    public i18n: TreeviewI18n,
-    private defaultConfig: TreeviewConfig,
-    private eventParser: TreeviewEventParser
-  ) {
+  constructor() {
     this.config = this.defaultConfig;
-    this.allItem = new TreeviewItem({ text: 'All', value: undefined });
+    this.allItem = new TreeviewItem({text: 'All', value: undefined});
   }
 
   get hasFilterItems(): boolean {

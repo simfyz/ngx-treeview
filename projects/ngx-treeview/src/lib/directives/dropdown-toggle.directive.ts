@@ -1,21 +1,22 @@
-import { Directive, ElementRef } from '@angular/core';
-import { DropdownDirective } from './dropdown.directive';
+import { Directive, ElementRef, inject } from '@angular/core';
+import {DropdownDirective} from './dropdown.directive';
 
 @Directive({
-    selector: '[ngxDropdownToggle]',
-    host: {
-        class: 'dropdown-toggle',
-        'aria-haspopup': 'true',
-        '[attr.aria-expanded]': 'dropdown.isOpen',
-        '(click)': 'dropdown.toggle()'
-    },
-    standalone: true
+  selector: '[ngxDropdownToggle]',
+  host: {
+    class: 'dropdown-toggle',
+    'aria-haspopup': 'true',
+    '[attr.aria-expanded]': 'dropdown.isOpen',
+    '(click)': 'dropdown.toggle()'
+  }
 })
 export class DropdownToggleDirective {
-  constructor(
-    public dropdown: DropdownDirective,
-    elementRef: ElementRef
-  ) {
+  dropdown = inject(DropdownDirective);
+
+  constructor() {
+    const dropdown = this.dropdown;
+    const elementRef = inject(ElementRef);
+
     dropdown.toggleElement = elementRef.nativeElement;
   }
 }
