@@ -1,6 +1,6 @@
 {
-  "name": "@simfyz/ngx-treeview",
-  "version": "2.0.0",
+  "name": "@paymate-software/ngx-treeview",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "keywords": [
@@ -19,10 +19,10 @@
   "author": "Leo Vo <leovo2708@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simfyz/ngx-treeview.git"
+    "url": "git+https://github.com/paymatesoftware/ngx-treeview.git"
   },
   "bugs": {
-    "url": "https://github.com/simfyz/ngx-treeview/issues"
+    "url": "https://github.com/paymatesoftware/ngx-treeview/issues"
   },
   "peerDependencies": {
     "@angular/common": ">=17.0.0",
@@ -34,7 +34,7 @@
   },
   "main": "src/public-api.ts",
   "sideEffects": false,
-  "homepage": "https://github.com/simfyz/ngx-treeview#readme",
+  "homepage": "https://github.com/paymatesoftware/ngx-treeview#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
